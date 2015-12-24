@@ -16,7 +16,7 @@ class App extends Component {
     componentDidMount() {
         const { dispatch, selectedReddit } = this.props;
         dispatch(fetchPostsIfNeeded(selectedReddit));
-        console.log("componentDidMount selectedReddit=" + selectedReddit);
+        //console.log("componentDidMount selectedReddit=" + selectedReddit);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -32,19 +32,74 @@ class App extends Component {
     }
 
     printState(){
+        function multiply(x){
+            let result = 2*x;
+
+            return function(y){
+                let xy= result*y;
+                return function(z){
+                    return xy*z;
+                }
+
+
+            }
+        }
+        const method=(x,s)=>y=>z=>{
+            return x*y*z*s;
+        }
+
+
+        //console.log("multiply(40)(10)=" + multiply(40)(10));
+        //console.log("method(40)(10)(2)=" + method(40)(10)(2));
+        //console.log("method(40)(10)=" + method(40)(10));
+        //console.log("method(40)(10)(11)=" + method(40)(10)(11));
+        //console.log("method(40,2)(10)(11)=" + method(40,2)(10)(11));
+
+        const m1 = msg=>func=>{
+            func(msg);
+        }
+
+        const func1=msg=>{
+            console.log(msg)
+        }
+         m1(2567890)(func1);
+
+        function applyMiddleware( ...middlewares ) {
+            return (next) =>
+                (reducer, initialState)=> {
+                    let store = next(reducer, initialState);
+                    let dispatch = store.dispatch;
+                    return {
+                        store,
+                        dispatch
+                    }
+                }
+
+        }
+
+        const func2 = function( reducer,initialState){
+            return {
+                store: reducer+initialState,
+                dispatch :'dispatch'
+            }
+        }
+        console.log('applyMiddleware( 23 )(func2)( \'aaaa\',\'bbb\')=' + applyMiddleware( 23 )(func2)( 'aaaa','bbb'));
+
+
 
     }
 
     handleRefreshClick(e) {
-        e.preventDefault()
+        e.preventDefault();
 
-        const { dispatch, selectedReddit } = this.props
-        dispatch(invalidateReddit(selectedReddit))
+        const { dispatch, selectedReddit } = this.props;
+        dispatch(invalidateReddit(selectedReddit));
         dispatch(fetchPostsIfNeeded(selectedReddit))
     }
 
     render() {
-        const { selectedReddit, posts, isFetching, lastUpdated } = this.props
+        this.printState();
+        const { selectedReddit, posts, isFetching, lastUpdated } = this.props;
         return (
             <div className='header'>
                 <Picker value={selectedReddit}
@@ -90,7 +145,7 @@ App.propTypes = {
 }
 
 function mapStateToProps(state) {
-    const { selectedReddit, postsByReddit } = state
+    const { selectedReddit, postsByReddit } = state;
     const {
         isFetching,
         lastUpdated,
