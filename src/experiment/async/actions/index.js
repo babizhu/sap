@@ -51,10 +51,11 @@ function fetchPosts(reddit) {
 }
 
 function shouldFetchPosts(state, reddit) {
-    const posts = state.postsByReddit[reddit]
+    const posts = state.postsByReddit[reddit];//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     if (!posts) {
         return true
     }
+
     if (posts.isFetching) {
         return false
     }
@@ -62,6 +63,7 @@ function shouldFetchPosts(state, reddit) {
 }
 
 export function fetchPostsIfNeeded(reddit) {
+
     return (dispatch, getState) => {
         if (shouldFetchPosts(getState(), reddit)) {
             return dispatch(fetchPosts(reddit))

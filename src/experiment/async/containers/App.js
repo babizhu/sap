@@ -16,22 +16,26 @@ class App extends Component {
     componentDidMount() {
         const { dispatch, selectedReddit } = this.props;
         dispatch(fetchPostsIfNeeded(selectedReddit));
-        //console.log("componentDidMount selectedReddit=" + selectedReddit);
+        console.log("componentDidMount selectedReddit=" + selectedReddit);
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.selectedReddit !== this.props.selectedReddit) {
-            const { dispatch, selectedReddit } = nextProps
+            //console.log("nextProps.selectedReddit !== this.props.selectedReddit");
+            const { dispatch, selectedReddit } = nextProps;
             dispatch(fetchPostsIfNeeded(selectedReddit))
+
         }
-        console.log("componentWillReceiveProps");
+
     }
 
     handleChange(nextReddit) {
-        this.props.dispatch(selectReddit(nextReddit))
+        const { dispatch, selectedReddit } = this.props;
+        dispatch(selectReddit(nextReddit));
+        //dispatch(fetchPostsIfNeeded(selectedReddit))
     }
 
-    printState(){
+    printState() {
         //function multiply(x){
         //    let result = 2*x;
         //
@@ -85,43 +89,43 @@ class App extends Component {
         //}
         //console.log('applyMiddleware( 23 )(func2)( \'aaaa\',\'bbb\')=' + applyMiddleware( 23 )(func2)( 'aaaa','bbb'));
 
-        const mutpt = function(x,y){
-            return 2*x*y;
-        };
-        const add = function(x,y){
-            return 2+x+y;
-        };
-        const func = function( number, method ){
-            return method(number);
-        }
-
-        console.log( func(3,add));
-
-        function fetchPostsIfNeeded(reddit) {
-            return (dispatch, getState) => {
-                console.log( dispatch + ' ' + getState);
-            }
-        }
-
-
-        //console.log( 'fetchPostsIfNeeded(\'a\') = ' + fetchPostsIfNeeded('a'));
-
-        const test = function (index,name) {
-            console.log('arguments=' + JSON.stringify(arguments) );
-            console.log(  [].slice.call(arguments, 0) );
-            console.log(  [].slice.call(arguments, 1) );
-            console.log(  [].slice.call(arguments, 2) );
-        };
-
-        test( 333, 'liulaoye');
-
-        const test2=function(){
-            console.log('abcdef');
-        }
-        const test1 = function( fn ){
-            fn.apply( );
-        };
-        test1( test2 );
+        //const mutpt = function(x,y){
+        //    return 2*x*y;
+        //};
+        //const add = function(x,y){
+        //    return 2+x+y;
+        //};
+        //const func = function( number, method ){
+        //    return method(number);
+        //}
+        //
+        //console.log( func(3,add));
+        //
+        //function fetchPostsIfNeeded(reddit) {
+        //    return (dispatch, getState) => {
+        //        console.log( dispatch + ' ' + getState);
+        //    }
+        //}
+        //
+        //
+        ////console.log( 'fetchPostsIfNeeded(\'a\') = ' + fetchPostsIfNeeded('a'));
+        //
+        //const test = function (index,name) {
+        //    console.log('arguments=' + JSON.stringify(arguments) );
+        //    console.log(  [].slice.call(arguments, 0) );
+        //    console.log(  [].slice.call(arguments, 1) );
+        //    console.log(  [].slice.call(arguments, 2) );
+        //};
+        //
+        //test( 333, 'liulaoye');
+        //
+        //const test2=function(){
+        //    console.log('abcdef');
+        //}
+        //const test1 = function( fn ){
+        //    fn.apply( );
+        //};
+        //test1( test2 );
 
         //var currying = function(fn) {
         //    // fn 指官员消化老婆的手段
@@ -148,7 +152,47 @@ class App extends Component {
         //
         //// 换一批老婆
         //getWife("超越韦小宝的老婆");
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+        //console.log('this.props = '+ JSON.stringify(this.props) );
+        //for( let key in this.props ){
+        //    console.log( 'key = ' + key);
+        //    console.log( 'value = ' + this.props[key] );
+        //}
+        //const keys = "abcd";
+        //let clazz = {
+        //    total: 'name'
+        //};
+        //let test = {
+        //    [clazz.total]:  2132323
+        //};
+        ////console.log(test.name);
+        //for (let key in test) {
+        //    console.log('key = ' + key);
+        //    console.log('value = ' + test[key]);
+        //}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+        //var target = { a: 1 };
+        //var source1 = { b: 2,c:4 };
+        //var source2 = { c: 3 };
+        //const result = Object.assign(target, source1, source2);
+        //console.log('target=' + JSON.stringify(target) + ' source1=' + JSON.stringify(source1) + ' source2=' + JSON.stringify(source2));
+        //console.log('result=' + JSON.stringify(result));
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        //const keys = 'abcd';
+        //let result=[];
+        //for( let ch of keys){
+        //    result = Object.assign({}, result, {
+        //        [ch]: ch
+        //    });
+        //}
+        //for (let key in result) {
+        //    console.log('key = ' + key);
+        //    console.log('value = ' + result[key]);
+        //}
+
+///////////////////////////////////////////////////////////////////////////////////////
     }
 
     handleRefreshClick(e) {
@@ -160,6 +204,7 @@ class App extends Component {
     }
 
     render() {
+
         this.printState();
         const { selectedReddit, posts, isFetching, lastUpdated } = this.props;
         return (
@@ -207,12 +252,13 @@ App.propTypes = {
 }
 
 function mapStateToProps(state) {
+
     const { selectedReddit, postsByReddit } = state;
     const {
         isFetching,
         lastUpdated,
         items: posts
-        } = postsByReddit[selectedReddit] || {
+        } = postsByReddit[selectedReddit] || {//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         isFetching: true,
         items: []
     };

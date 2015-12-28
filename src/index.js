@@ -7,7 +7,7 @@ import { Provider } from 'react-redux'
 import App from './experiment/async/containers/App'
 import configureStore from './experiment/async/store/configureStore'
 
-const store = configureStore()
+const store = configureStore();
 
 render(
     <Provider store={store}>

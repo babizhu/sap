@@ -15,7 +15,7 @@ class Counter extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.interval);experiment
+    clearInterval(this.interval);
   }
 
   render() {
