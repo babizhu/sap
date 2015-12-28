@@ -5,9 +5,9 @@
 export const GET_SIDEBAR_JSON = 'GET_SIDEBAR_JSON';
 
 
-export function selectReddit(reddit) {
+export function getSidebarJson() {
     return {
-        type: SELECT_REDDIT,
+        type: GET_SIDEBAR_JSON,
         reddit
     }
 }
