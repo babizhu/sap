@@ -253,6 +253,13 @@ App.propTypes = {
 
 function mapStateToProps(state) {
 
+    for( let key in state ){
+        console.log('key=' + key + ',value=' + state[key]);
+        if( key ==='postsByReddit'){
+            console.log( JSON.stringify(state[key]));
+        }
+    }
+
     const { selectedReddit, postsByReddit } = state;
     const {
         isFetching,
