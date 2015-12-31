@@ -7,7 +7,7 @@ import {
     RECEIVE_SIDEBAR_DATA
 } from '../actions'
 
-function sidebarData(state = { data:'',receivedAt:0}, action = null) {
+function sidebarData(state = { data:[],receivedAt:0}, action = null) {
     switch (action.type) {
         case RECEIVE_SIDEBAR_DATA:
 

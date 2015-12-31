@@ -1,4 +1,5 @@
-import fetch from 'isomorphic-fetch'
+//import fetch from 'node-fetch'
+import fetch  from 'fetch-polyfill'
 
 export const REQUEST_POSTS = 'REQUEST_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
